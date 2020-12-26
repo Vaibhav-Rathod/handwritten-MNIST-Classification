@@ -1,9 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # # HANDWRITTEN MNIST ClASSIFICATION 
 
-# In[139]:
+
 
 
 import keras
@@ -19,7 +17,6 @@ from keras import backend as K
 print(x_train.shape, y_train.shape)
 
 
-# In[140]:
 
 
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
@@ -39,7 +36,7 @@ print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
 
 
-# In[141]:
+
 
 
 from keras.preprocessing.image import ImageDataGenerator
@@ -49,7 +46,7 @@ train_datagen = ImageDataGenerator(
 train_datagen.fit(x_train)
 
 
-# In[142]:
+
 
 
 batch_size = 32
@@ -69,7 +66,6 @@ model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 
-# In[143]:
 
 
 hist = model.fit(train_datagen.flow(x_train, y_train, batch_size=32),epochs=epochs,verbose=1,validation_data=(x_test, y_test))
@@ -79,7 +75,7 @@ model.save('F:\python_models\mnist.h5')
 print("Saving the model as mnist.h5")
 
 
-# In[146]:
+
 
 
 plt.plot(hist.history['accuracy'])
@@ -99,7 +95,6 @@ plt.legend(['train', 'test'], loc='upper left')
 plt.show()
 
 
-# In[145]:
 
 
 score = model.evaluate(x_test, y_test, verbose=0)
@@ -107,7 +102,7 @@ print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
 
-# In[168]:
+
 
 
 from keras.models import load_model
@@ -117,7 +112,7 @@ import win32gui
 from PIL import ImageGrab, Image
 import numpy as np
 
-#model = load_model('F:\python_models\mnist.h5')
+model = load_model('F:\python_models\mnist.h5')
 
 def predict_digit(img):
     #resize image to 28x28 pixels
